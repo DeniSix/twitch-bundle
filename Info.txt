@@ -1,0 +1,25 @@
+Components with different licenses will be downloaded during installation:
+
+Streamlink
+https://github.com/streamlink/streamlink
+
+Livestreamer Twitch GUI
+https://github.com/bastimeyer/livestreamer-twitch-gui
+
+mpv
+https://mpv.io/
+
+
+Tools used to create installer:
+
+7-Zip
+http://www.7-zip.org/
+
+Inno Setup
+http://www.jrsoftware.org/isinfo.php
+
+Inno Download Plugin
+https://bitbucket.org/mitrich_k/inno-download-plugin
+
+Inno Setup 7-Zip unpack
+http://stackoverflow.com/questions/32256432/how-to-execute-7zip-without-blocking-the-innosetup-ui
