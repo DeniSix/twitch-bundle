@@ -2,7 +2,7 @@
 #define MyAppName "Twitch Bundle"
 #define MyAppVersion "1.0"
 ;#define MyAppPublisher "My Company, Inc."
-;#define MyAppURL "http://www.example.com/"
+#define MyAppURL "https://github.com/denisix/twitch-bundle"
 
 #define TwitchGuiRepo "bastimeyer/livestreamer-twitch-gui"
 #define StreamlinkRepo "streamlink/streamlink"
@@ -27,9 +27,9 @@ AppId={{CCAB6218-E38A-4D98-86EB-50C0399523DE}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppPublisher={#MyAppPublisher}
-;AppPublisherURL={#MyAppURL}
-;AppSupportURL={#MyAppURL}
-;AppUpdatesURL={#MyAppURL}
+AppPublisherURL={#MyAppURL}
+AppSupportURL={#MyAppURL}
+AppUpdatesURL={#MyAppURL}
 DefaultDirName={userappdata}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 UninstallDisplayName={#MyAppName}
