@@ -1,23 +1,23 @@
 
 #define MyAppName "Twitch Bundle"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 ;#define MyAppPublisher "My Company, Inc."
 #define MyAppURL "https://github.com/denisix/twitch-bundle"
 
-#define TwitchGuiRepo "bastimeyer/livestreamer-twitch-gui"
+#define TwitchGuiRepo "streamlink/streamlink-twitch-gui"
 #define StreamlinkRepo "streamlink/streamlink"
 #define MpvUrl "https://mpv.srsfckn.biz/mpv-i686-latest.7z"
 
-#define TwitchGuiTmp "{tmp}\livestreamer-twitch-gui.zip"
+#define TwitchGuiTmp "{tmp}\twitch-gui.exe"
 #define StreamlinkTmp "{tmp}\streamlink.exe"
 #define MpvTmp "{tmp}\mpv.7z"
 
-#define TwitchGuiPath "{app}\livestreamer-twitch-gui"
+#define TwitchGuiPath "{app}\gui"
 #define StreamlinkPath "{app}\streamlink"
 #define MpvPath "{app}\mpv"
 
-#define GuiAppName "Livestreamer Twitch GUI"
-#define GuiAppExeName TwitchGuiPath + "\livestreamer-twitch-gui.exe"
+#define GuiAppName "Streamlink Twitch GUI"
+#define GuiAppExeName TwitchGuiPath + "\streamlink-twitch-gui.exe"
 
 #include <idp.iss>
 #include "unzip.iss"
@@ -46,7 +46,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
-Source: "data\Local Storage\app_livestreamer-twitch-gui_0.localstorage"; DestDir: "{localappdata}\livestreamer-twitch-gui\Local Storage"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "data\User Data\Default\Local Storage\chrome-extension_kjlcknihpadniagphehmpojkkdigigjp_0.localstorage"; DestDir: "{localappdata}\streamlink-twitch-gui\User Data\Default\Local Storage"; Flags: onlyifdoesntexist uninsneveruninstall
 Source: "bin\7z.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall
 Source: "bin\7z.dll"; DestDir: "{tmp}"; Flags: deleteafterinstall
 Source: "bin\GitHubReleases.dll"; DestDir: "{tmp}"; Flags: dontcopy
@@ -79,18 +79,14 @@ var
   Url: WideString;
   Size: Integer;
 begin
-  Size := GetLatestReleaseLink('{#TwitchGuiRepo}', 'win32', Url);
+  Size := GetLatestReleaseLink('{#TwitchGuiRepo}', 'win32-installer', Url);
   idpAddFileSize(Url, ExpandConstant('{#TwitchGuiTmp}'), Size);
   
   Size := GetLatestReleaseLink('{#StreamlinkRepo}', '\.exe', Url);
   idpAddFileSize(Url, ExpandConstant('{#StreamlinkTmp}'), Size);
   
   idpAddFile('{#MpvUrl}', ExpandConstant('{#MpvTmp}'));
-  (*
-  idpAddFile('http://localhost:8000/livestreamer-twitch-gui-v0.16.0-win32.zip', ExpandConstant('{#TwitchGuiTmp}'));
-  idpAddFile('http://localhost:8000/streamlink-0.1.0.exe', ExpandConstant('{#StreamlinkTmp}'));
-  idpAddFile('http://localhost:8000/mpv-i686-20161120.7z', ExpandConstant('{#MpvTmp}'));
-  *)
+
   idpDownloadAfter(wpReady);
   
   Extracting := TNewStaticText.Create(WizardForm);
@@ -107,19 +103,13 @@ procedure CurStepChanged(CurStep: TSetupStep);
 begin
   if CurStep = ssPostInstall then 
   begin
-    Extracting.Caption := 'Extracting Livestreamer Twitch GUI...';
-    UnZip('{#TwitchGuiTmp}', '{app}');
+    Extracting.Caption := 'Extracting Streamlink Twitch GUI...';
+    UnZip('{#TwitchGuiTmp}', '{#TwitchGuiPath}');
 
     Extracting.Caption := 'Extracting mpv...';
     UnZip('{#MpvTmp}', '{#MpvPath}');
     
     Extracting.Caption := 'Extracting Streamlink...';
     UnZip('{#StreamlinkTmp}', '{#StreamlinkPath}');
-    
-    // Shebang in streamlink must be rewritten to actual python location
-    ShellExecute(0, 'open',
-      ExpandConstant('{#StreamlinkPath}\Python\pythonw.exe'),
-      ExpandConstant('"{#StreamlinkPath}\_rewrite_shebangs.py" "{#StreamlinkPath}\bin"'),
-      '', SW_SHOW);
   end;
 end;

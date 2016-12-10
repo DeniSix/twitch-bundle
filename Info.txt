@@ -3,8 +3,8 @@ Components with different licenses will be downloaded during installation:
 Streamlink
 https://github.com/streamlink/streamlink
 
-Livestreamer Twitch GUI
-https://github.com/bastimeyer/livestreamer-twitch-gui
+Streamlink Twitch GUI
+https://github.com/streamlink/streamlink-twitch-gui
 
 mpv
 https://mpv.io/

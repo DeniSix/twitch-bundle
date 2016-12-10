@@ -1,7 +1,7 @@
 
 # Twitch Bundle
 
-Download latest versions of [Livestreamer Twitch GUI](https://github.com/bastimeyer/livestreamer-twitch-gui),
+Download latest versions of [Streamlink Twitch GUI](https://github.com/streamlink/streamlink-twitch-gui),
 [Streamlink](https://github.com/streamlink/streamlink) and [mpv](https://mpv.io/) with no hassle.
 
 [Download latest release](https://github.com/denisix/twitch-bundle/releases)
